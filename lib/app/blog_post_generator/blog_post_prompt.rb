@@ -17,9 +17,10 @@ module App
       def prompt!
         App::Logger.info('Prompting for blog post')
 
-        prompt_client.prompt!(prompt: 'Some prompt')
+        prompt_result =
+          prompt_client.prompt!(prompt: './prompts/blog_post_prompt')
 
-        BlogPostPromptResult.new
+        BlogPostPromptResult.new(**prompt_result)
       end
 
       private
