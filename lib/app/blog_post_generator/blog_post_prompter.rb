@@ -1,4 +1,5 @@
 require_relative '../blog_post_generator/config'
+require_relative '../logger'
 
 module App
   module BlogPostGenerator
@@ -14,7 +15,11 @@ module App
       end
 
       def prompt!
+        App::Logger.info('Prompting for blog post')
+
         prompt_client.prompt!(prompt: 'Some prompt')
+
+        BlogPostPromptResult.new
       end
 
       private

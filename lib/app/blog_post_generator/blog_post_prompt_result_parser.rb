@@ -1,3 +1,5 @@
+require_relative '../logger'
+
 module App
   module BlogPostGenerator
     class BlogPostPromptResultParser
@@ -6,6 +8,9 @@ module App
 
       class << self
         def build_blog_post(blog_post_prompt_result:, blog_class:)
+          App::Logger.info(
+            "Building blog post from #{blog_post_prompt_result} to #{blog_class}",
+          )
           new(blog_post_prompt_result, blog_class).build_blog_post
         end
       end
