@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/app/blog_post_generator/main.rb'
+require_relative '../lib/app/logger'
 
-App::BlogPostGenerator::Main.run!
+begin
+  App::Logger.info('Application started')
+  App::BlogPostGenerator::Main.run!
+ensure
+  App::Logger.info('Application stopped')
+end
