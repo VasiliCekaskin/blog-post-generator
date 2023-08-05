@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/app/blog_post_generator.rb'
+
+App::BlogPostGenerator.new.generate
