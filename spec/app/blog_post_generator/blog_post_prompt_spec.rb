@@ -7,7 +7,9 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
     it 'prompts for a blog post' do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: './prompts/blog_post_prompt',
-      ).and_return(ok: true, data: 'some raw prompt result')
+      ).and_return(
+        App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
+      )
 
       described_class.prompt!
     end
@@ -15,10 +17,12 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
     it 'returns a blog post prompt result' do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: './prompts/blog_post_prompt',
-      ).and_return({ ok: true, data: 'some raw prompt result' })
+      ).and_return(
+        App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
+      )
 
       expect(described_class.prompt!).to have_attributes(
-        { ok: true, data: 'some raw prompt result' },
+        { data: { title: 'some title' } },
       )
     end
   end

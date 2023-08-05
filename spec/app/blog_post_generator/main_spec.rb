@@ -23,8 +23,6 @@ RSpec.describe App::BlogPostGenerator::Main do
         :from_blog_post_prompt,
       ).with(
         blog_post_prompt: App::BlogPostGenerator::Config.blog_post_prompt,
-        blog_post_prompt_result_parser:
-          App::BlogPostGenerator::Config.blog_post_prompt_result_parser,
       ).and_return(blog_post)
 
       expect(blog_post).to receive(:save!).with(
@@ -42,22 +40,6 @@ RSpec.describe App::BlogPostGenerator::Main do
 
         expect(App::Logger).to receive(:error).with(
           App::BlogPostGenerator::PromptClients::ChatGPT::PromptError,
-        )
-
-        main.generate_blog!
-      end
-    end
-
-    context 'with error during prompt result parsing' do
-      it 'logs the error' do
-        allow(App::BlogPostGenerator::BlogPost).to receive(
-          :from_blog_post_prompt,
-        ).and_raise(
-          App::BlogPostGenerator::BlogPostPromptResultParser::ParseError,
-        )
-
-        expect(App::Logger).to receive(:error).with(
-          App::BlogPostGenerator::BlogPostPromptResultParser::ParseError,
         )
 
         main.generate_blog!

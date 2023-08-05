@@ -4,16 +4,10 @@ module App
   module BlogPostGenerator
     class BlogPost
       class << self
-        def from_blog_post_prompt(
-          blog_post_prompt:,
-          blog_post_prompt_result_parser:
-        )
+        def from_blog_post_prompt(blog_post_prompt:)
           blog_post_prompt_result = blog_post_prompt.prompt!
 
-          blog_post_prompt_result_parser.build_blog_post(
-            blog_post_prompt_result:,
-            blog_class: self,
-          )
+          new(blog_post_prompt_result.data[:title])
         end
       end
 
