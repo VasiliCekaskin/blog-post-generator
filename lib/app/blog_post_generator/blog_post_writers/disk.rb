@@ -17,10 +17,12 @@ module App
           @blog_post = blog_post
         end
 
+        attr_reader :blog_post
+
         def write_blog_post
           App::Logger.info('Writing new blog to disk')
 
-          File.open("./blog_posts/#{blog_post.title}", 'w') do |file|
+          File.open("#{__dir__}/blog_posts/#{blog_post.title}", 'w') do |file|
             file.write(blog_post.title)
           end
 

@@ -14,8 +14,12 @@ RSpec.describe App::BlogPostGenerator::PromptClients::ChatGPT do
 
       allow(openai_client).to receive(:chat).and_return(
         {
-          choices: [
-            { message: { content: "#{Oj.dump({ title: 'some title' })}" } },
+          'choices' => [
+            {
+              'message' => {
+                'content' => "#{Oj.dump({ title: 'some title' })}",
+              },
+            },
           ],
         },
       )

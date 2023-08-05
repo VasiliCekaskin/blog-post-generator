@@ -1,1 +1,7 @@
-This is the blog_post_prompt
+You are an assistant who only speaks JSON. Do not write normal text.
+
+Write a blog post like the following:
+
+{
+"title": "My Blog post title"
+}
