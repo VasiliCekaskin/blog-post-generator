@@ -19,7 +19,12 @@ module App
 
         def write_blog_post
           App::Logger.info('Writing new blog to disk')
-          :ok
+
+          File.open("./blog_posts/#{blog_post.title}", 'w') do |file|
+            file.write(blog_post.title)
+          end
+
+          App::Logger.info('Successfully wrote new blog to disk')
         end
       end
     end

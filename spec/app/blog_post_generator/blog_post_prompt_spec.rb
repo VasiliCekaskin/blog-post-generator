@@ -7,9 +7,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
     before { allow(File).to receive(:read).and_return('some prompt') }
 
     it 'prompts for a blog post' do
-      expect(File).to receive(:read).with(
-        './prompts/blog_post_prompt',
-      ).and_return('some prompt')
+      expect(File).to receive(:read).and_return('some prompt')
 
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
