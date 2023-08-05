@@ -21,6 +21,10 @@ RSpec.describe App::BlogPostGenerator::Main do
     it 'creates blog_posts' do
       expect(App::BlogPostGenerator::BlogPost).to receive(
         :from_blog_post_prompt,
+      ).with(
+        blog_post_prompt: App::BlogPostGenerator::Config.blog_post_prompt,
+        blog_post_prompt_result_parser:
+          App::BlogPostGenerator::Config.blog_post_prompt_result_parser,
       ).and_return(blog_post)
 
       expect(blog_post).to receive(:save!).with(
