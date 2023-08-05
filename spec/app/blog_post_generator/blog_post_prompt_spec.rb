@@ -4,9 +4,15 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
   describe '.prompt!' do
     let(:prompt_client) { App::BlogPostGenerator::Config.prompt_client }
 
+    before { allow(File).to receive(:read).and_return('some prompt') }
+
     it 'prompts for a blog post' do
+      expect(File).to receive(:read).with(
+        './prompts/blog_post_prompt',
+      ).and_return('some prompt')
+
       expect(prompt_client).to receive(:prompt!).with(
-        prompt: './prompts/blog_post_prompt',
+        prompt: 'some prompt',
       ).and_return(
         App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
       )
@@ -16,7 +22,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
 
     it 'returns a blog post prompt result' do
       expect(prompt_client).to receive(:prompt!).with(
-        prompt: './prompts/blog_post_prompt',
+        prompt: 'some prompt',
       ).and_return(
         App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
       )
