@@ -2,7 +2,7 @@ require_relative 'prompt_clients/chat_gpt'
 require_relative 'blog_post_writers/disk'
 
 require_relative 'blog_post'
-require_relative 'blog_post_prompter'
+require_relative 'blog_post_prompt'
 require_relative 'blog_post_prompt_result'
 require_relative 'blog_post_prompt_result_parser'
 
@@ -18,9 +18,9 @@ module App
           @prompt_client ||= App::BlogPostGenerator::PromptClients::ChatGPT
         end
 
-        def blog_post_prompter
+        def blog_post_prompt
           @blog_post_prompt_result_prompter ||=
-            App::BlogPostGenerator::BlogPostPrompter
+            App::BlogPostGenerator::BlogPostPrompt
         end
 
         def blog_post_prompt_result_parser

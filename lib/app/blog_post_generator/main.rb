@@ -13,11 +13,11 @@ module App
       end
 
       def initialize(
-        blog_post_prompter: Config.blog_post_prompter,
+        blog_post_prompt: Config.blog_post_prompt,
         blog_post_prompt_result_parser: Config.blog_post_prompt_result_parser,
         blog_post_writer: Config.blog_post_writer
       )
-        @blog_post_prompter = blog_post_prompter
+        @blog_post_prompt = blog_post_prompt
         @blog_post_prompt_result_parser = blog_post_prompt_result_parser
         @blog_post_writer = blog_post_writer
       end
@@ -28,13 +28,13 @@ module App
 
       private
 
-      attr_reader :blog_post_prompter,
+      attr_reader :blog_post_prompt,
                   :blog_post_prompt_result_parser,
                   :blog_post_writer
 
       def generate_and_save!
         BlogPost.from_blog_post_prompt(
-          blog_post_prompter:,
+          blog_post_prompt:,
           blog_post_prompt_result_parser:,
         ).save!(blog_post_writer:)
       rescue StandardError => e

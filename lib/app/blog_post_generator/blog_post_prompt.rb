@@ -3,7 +3,7 @@ require_relative '../logger'
 
 module App
   module BlogPostGenerator
-    class BlogPostPrompter
+    class BlogPostPrompt
       class << self
         def prompt!
           new.prompt!
