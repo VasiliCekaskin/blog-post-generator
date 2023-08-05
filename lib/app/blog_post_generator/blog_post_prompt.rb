@@ -20,7 +20,7 @@ module App
         prompt_result =
           prompt_client.prompt!(prompt: './prompts/blog_post_prompt')
 
-        BlogPostPromptResult.new(**prompt_result)
+        BlogPostPromptResult.from_prompt_result(prompt_result)
       end
 
       private

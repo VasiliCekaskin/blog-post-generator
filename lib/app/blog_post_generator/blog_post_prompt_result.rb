@@ -1,12 +1,13 @@
+require_relative './prompt_result'
+
 module App
   module BlogPostGenerator
-    class BlogPostPromptResult
-      def initialize(ok:, data:)
-        @ok = ok
-        @data = data
+    class BlogPostPromptResult < PromptResult
+      class << self
+        def from_prompt_result(prompt_result)
+          new(prompt_result.data)
+        end
       end
-
-      attr_reader :ok, :data
     end
   end
 end
