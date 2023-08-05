@@ -1,0 +1,4 @@
+{
+  "plugins": ["@prettier/plugin-ruby"],
+  "rubyPlugins": "plugin/single_quotes,plugin/trailing_comma"
+}
