@@ -10,13 +10,15 @@ module App
         end
       end
 
+      attr :blog_class
+
       def initialize(blog_post_prompt_result, blog_class)
         @blog_post_prompt_result = blog_post_prompt_result
         @blog_class = blog_class
       end
 
       def build_blog_post
-        blog_class.new('some blog info')
+        blog_class.new('Some blog title')
       end
     end
   end

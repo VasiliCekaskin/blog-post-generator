@@ -12,7 +12,7 @@ module App
 
           blog_post_prompt_result_parser.build_blog_post(
             blog_post_prompt_result:,
-            blog_class: self.class,
+            blog_class: self,
           )
         end
       end
@@ -24,7 +24,7 @@ module App
       attr_reader :title
 
       def save!(blog_post_writer:)
-        blog_post_writer.write_blog_post(blog_post: self)
+        blog_post_writer.write_blog_post(blog_post: self.class)
       end
     end
   end

@@ -1,3 +1,5 @@
+require_relative '../../logger'
+
 module App
   module BlogPostGenerator
     module BlogPostWriters
@@ -16,6 +18,7 @@ module App
         end
 
         def write_blog_post
+          App::Logger.info('Writing new blog to disk')
           :ok
         end
       end

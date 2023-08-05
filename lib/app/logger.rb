@@ -1,7 +1,7 @@
 module App
   class Logger
     class << self
-      def error(message)
+      def info(message)
         puts message
       end
     end
