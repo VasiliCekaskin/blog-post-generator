@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem "ruby-openai"
+gem 'oj'
 
 group :test do
 	gem 'rspec'

@@ -13,6 +13,10 @@ module App
           @prompts_path ||= File.join(File.dirname(__FILE__), '..', 'prompts')
         end
 
+        def openai_access_token
+          'some access token'
+        end
+
         def prompt_client
           @prompt_client ||= App::BlogPostGenerator::PromptClients::ChatGPT
         end

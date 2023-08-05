@@ -11,6 +11,7 @@ GEM
     faraday-net_http (3.0.2)
     method_source (1.0.0)
     multipart-post (2.3.0)
+    oj (3.15.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -36,6 +37,7 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  oj
   pry
   rspec
   ruby-openai
