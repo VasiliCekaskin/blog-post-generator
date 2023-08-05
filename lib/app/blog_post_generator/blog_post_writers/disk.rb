@@ -24,9 +24,16 @@ module App
 
           File.open("#{__dir__}/blog_posts/#{blog_post.title}", 'w') do |file|
             file.write(blog_post.title)
+            file.write(blog_post.author)
+            file.write(blog_post.date)
+            file.write(blog_post.tags)
+            file.write(blog_post.content)
+            file.write(blog_post.comments)
           end
 
-          App::Logger.info('Successfully wrote new blog to disk')
+          App::Logger.info(
+            "Successfully wrote new blog to disk #{__dir__}/blog_posts/#{blog_post.title}",
+          )
         end
       end
     end
