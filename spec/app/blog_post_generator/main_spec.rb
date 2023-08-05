@@ -6,25 +6,72 @@ RSpec.describe App::BlogPostGenerator::Main do
   let(:blog_post) do
     instance_double(App::BlogPostGenerator::BlogPost, save!: nil)
   end
-  let(:blog_post_prompt_result) do
-    instance_double(App::BlogPostGenerator::BlogPostPromptResult)
-  end
 
   describe '#run' do
+    before do
+      allow(App::BlogPostGenerator::BlogPost).to receive(
+        :from_blog_post_prompt,
+      ).and_return(blog_post)
+
+      allow(blog_post).to receive(:save!).with(
+        blog_post_writer: App::BlogPostGenerator::Config.blog_post_writer,
+      )
+    end
+
     it 'creates blog_posts' do
       expect(App::BlogPostGenerator::BlogPost).to receive(
         :from_blog_post_prompt,
-      ).with(
-        blog_post_prompter: App::BlogPostGenerator::Config.blog_post_prompter,
-        blog_post_prompt_result_parser:
-          App::BlogPostGenerator::Config.blog_post_prompt_result_parser,
       ).and_return(blog_post)
 
       expect(blog_post).to receive(:save!).with(
         blog_post_writer: App::BlogPostGenerator::Config.blog_post_writer,
       )
 
-      main.generate!
+      main.generate_blog!
+    end
+
+    context 'with error during prompt client request' do
+      it 'logs the error' do
+        allow(App::BlogPostGenerator::BlogPost).to receive(
+          :from_blog_post_prompt,
+        ).and_raise(App::BlogPostGenerator::PromptClients::ChatGPT::PromptError)
+
+        expect(App::Logger).to receive(:error).with(
+          App::BlogPostGenerator::PromptClients::ChatGPT::PromptError,
+        )
+
+        main.generate_blog!
+      end
+    end
+
+    context 'with error during prompt result parsing' do
+      it 'logs the error' do
+        allow(App::BlogPostGenerator::BlogPost).to receive(
+          :from_blog_post_prompt,
+        ).and_raise(
+          App::BlogPostGenerator::BlogPostPromptResultParser::ParseError,
+        )
+
+        expect(App::Logger).to receive(:error).with(
+          App::BlogPostGenerator::BlogPostPromptResultParser::ParseError,
+        )
+
+        main.generate_blog!
+      end
+    end
+
+    context 'with error during prompt writing' do
+      it 'logs the error' do
+        allow(App::BlogPostGenerator::BlogPost).to receive(
+          :from_blog_post_prompt,
+        ).and_raise(App::BlogPostGenerator::BlogPostWriters::Disk::WriteError)
+
+        expect(App::Logger).to receive(:error).with(
+          App::BlogPostGenerator::BlogPostWriters::Disk::WriteError,
+        )
+
+        main.generate_blog!
+      end
     end
   end
 end

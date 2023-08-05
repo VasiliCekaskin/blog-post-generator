@@ -14,12 +14,12 @@ module App
       end
 
       def prompt!
-        prompt_client.prompt!('Some prompt')
+        prompt_client.prompt!(prompt: 'Some prompt')
       end
 
       private
 
-      attr_reader :prompt
+      attr_reader :prompt_client
     end
   end
 end

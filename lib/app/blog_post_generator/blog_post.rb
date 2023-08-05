@@ -1,3 +1,5 @@
+require_relative './blog_post_prompter'
+
 module App
   module BlogPostGenerator
     class BlogPost

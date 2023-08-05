@@ -1,6 +1,9 @@
 module App
   module BlogPostGenerator
     class BlogPostPromptResultParser
+      class ParseError < StandardError
+      end
+
       class << self
         def build_blog_post(blog_post_prompt_result:, blog_class:)
           new(blog_post_prompt_result, blog_class).build_blog_post
