@@ -11,7 +11,7 @@ module App
       end
 
       def initialize(
-        prompt_client: Config.prompt_client,
+        blog_post_prompter: Config.blog_post_prompter,
         blog_post_prompt_result_parser: Config.blog_post_prompt_result_parser,
         blog_post_writer: Config.blog_post_writer
       )
@@ -23,7 +23,7 @@ module App
       def generate!
         blog_post = generate_blog_post
 
-        blog_post.save!
+        blog_post.save!(blog_post_writer:)
       end
 
       private
@@ -33,13 +33,9 @@ module App
                   :blog_post_writer
 
       def generate_blog_post
-        blog_post_prompt_result = blog_post_prompter.prompt!
-
         BlogPost.from_blog_post_prompt(
           blog_post_prompter:,
-          blog_post_prompt_result:,
           blog_post_prompt_result_parser:,
-          blog_post_writer:,
         )
       end
 

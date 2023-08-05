@@ -1,51 +1,28 @@
 require_relative '../../../lib/app/blog_post_generator/main'
 
 RSpec.describe App::BlogPostGenerator::Main do
-  let(:prompt_client) { App::BlogPostGenerator::PromptClients::ChatGPT.new }
-  let(:blog_post_writer) do
-    App::BlogPostGenerator::BlogPostWriters::Disk.new(blog_post:)
-  end
-  let(:blog_post_prompt_result_parser) do
-    double(:blog_post_prompt_result_parser, parse: blog_post)
-  end
+  subject(:main) { described_class.new }
 
-  subject(:main) do
-    described_class.new(
-      prompt_client:,
-      blog_post_prompt_result_parser:,
-      blog_post_writer:,
-    )
-  end
-
-  let(:prompt_client) { App::BlogPostGenerator::PromptClients::ChatGPT.new }
-  let(:blog_post) { App::BlogPostGenerator::BlogPost.new }
-  let(:blog_post_prompter) do
-    App::BlogPostGenerator::BlogPostPrompter.new(prompt_client:)
+  let(:blog_post) do
+    instance_double(App::BlogPostGenerator::BlogPost, save!: nil)
   end
   let(:blog_post_prompt_result) do
-    App::BlogPostGenerator::BlogPostPromptResult.new
+    instance_double(App::BlogPostGenerator::BlogPostPromptResult)
   end
 
   describe '#run' do
     it 'creates blog_posts' do
-      expect(App::BlogPostGenerator::BlogPostPrompter).to receive(:new).with(
-        prompt_client:,
-      ).and_return(blog_post_prompter)
-
-      expect(blog_post_prompter).to receive(:prompt!).and_return(
-        blog_post_prompt_result,
-      )
-
       expect(App::BlogPostGenerator::BlogPost).to receive(
         :from_blog_post_prompt,
       ).with(
-        blog_post_prompter:,
-        blog_post_prompt_result:,
-        blog_post_prompt_result_parser:,
-        blog_post_writer:,
+        blog_post_prompter: App::BlogPostGenerator::Config.blog_post_prompter,
+        blog_post_prompt_result_parser:
+          App::BlogPostGenerator::Config.blog_post_prompt_result_parser,
       ).and_return(blog_post)
 
-      expect(blog_post).to receive(:save!)
+      expect(blog_post).to receive(:save!).with(
+        blog_post_writer: App::BlogPostGenerator::Config.blog_post_writer,
+      )
 
       main.generate!
     end
