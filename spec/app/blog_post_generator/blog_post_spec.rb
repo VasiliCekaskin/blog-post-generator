@@ -1,7 +1,7 @@
 require_relative '../../../lib/app/blog_post_generator/blog_post'
 
 RSpec.describe App::BlogPostGenerator::BlogPost do
-  describe '#from_blog_post_prompt' do
+  describe '.from_blog_post_prompt' do
     let(:expected_blog_post) do
       instance_double(App::BlogPostGenerator::BlogPost)
     end
@@ -24,6 +24,21 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
           blog_post_prompt_result_parser:,
         ),
       ).to be(expected_blog_post)
+    end
+  end
+
+  describe '#save!' do
+    subject(:blog_post) { described_class.new(title) }
+
+    let(:title) { 'some title' }
+    let(:blog_post_writer) { App::BlogPostGenerator::BlogPostWriters::Disk }
+
+    it 'writes the blog post using the given writer' do
+      expect(blog_post_writer).to receive(:write_blog_post).with(
+        blog_post: blog_post,
+      )
+
+      blog_post.save!(blog_post_writer: blog_post_writer)
     end
   end
 end

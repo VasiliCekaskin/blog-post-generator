@@ -24,7 +24,7 @@ module App
       attr_reader :title
 
       def save!(blog_post_writer:)
-        blog_post_writer.write_blog_post(blog_post: self.class)
+        blog_post_writer.write_blog_post(blog_post: self)
       end
     end
   end
