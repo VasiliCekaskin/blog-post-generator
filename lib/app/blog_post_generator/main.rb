@@ -5,7 +5,6 @@ module App
   module BlogPostGenerator
     class Main
       class << self
-        # Is this a good style?
         def run!
           blog_post_generator = new
 
