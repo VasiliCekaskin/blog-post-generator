@@ -28,12 +28,12 @@ module App
           File.open(code_reviews_path, 'w') { |_file| code_review.json }
 
           Logger.info(
-            "Successfully wrote new code review to disk #{code_reviews_path}"
+            "Successfully wrote new code review to disk #{code_reviews_path}",
           )
         end
 
         def code_reviews_path
-          "#{Config.code_reviews_path}/#{code_review.title}.json"
+          "#{Config.code_reviews_path}/#{code_review.title}"
         end
       end
     end

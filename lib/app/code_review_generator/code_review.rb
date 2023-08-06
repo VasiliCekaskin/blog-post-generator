@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'securerandom'
 
 module App
   module CodeReviewGenerator
@@ -13,7 +14,10 @@ module App
 
       def initialize(data)
         @data = data
+        @title = SecureRandom.uuid
       end
+
+      attr_reader :title
 
       def save!(code_review_writer:)
         code_review_writer.write_code_review!(code_review: self)
