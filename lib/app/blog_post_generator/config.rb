@@ -1,4 +1,4 @@
-require_relative 'prompt_clients/chat_gpt'
+require_relative '../prompt_clients/chat_gpt'
 require_relative 'blog_post_writers/disk'
 
 require_relative 'blog_post'
@@ -13,12 +13,8 @@ module App
           @prompts_path ||= File.join(File.dirname(__FILE__), '..', 'prompts')
         end
 
-        def openai_access_token
-          'some access token'
-        end
-
         def prompt_client
-          @prompt_client ||= App::BlogPostGenerator::PromptClients::ChatGPT
+          @prompt_client ||= App::PromptClients::ChatGPT
         end
 
         def blog_post_prompt

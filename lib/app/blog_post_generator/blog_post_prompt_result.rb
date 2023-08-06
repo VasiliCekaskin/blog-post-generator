@@ -1,6 +1,6 @@
 require 'oj'
 
-require_relative './prompt_result'
+require_relative '../prompt_result'
 
 module App
   module BlogPostGenerator

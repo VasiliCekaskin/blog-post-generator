@@ -36,10 +36,10 @@ RSpec.describe App::BlogPostGenerator::Main do
       it 'logs the error' do
         allow(App::BlogPostGenerator::BlogPost).to receive(
           :from_blog_post_prompt,
-        ).and_raise(App::BlogPostGenerator::PromptClients::ChatGPT::PromptError)
+        ).and_raise(App::PromptClients::ChatGPT::PromptError)
 
         expect(App::Logger).to receive(:error).with(
-          App::BlogPostGenerator::PromptClients::ChatGPT::PromptError,
+          App::PromptClients::ChatGPT::PromptError,
         )
 
         main.generate_blog!

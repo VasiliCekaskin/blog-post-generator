@@ -12,7 +12,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::BlogPostGenerator::PromptResult.new(
+        App::PromptResult.new(
           {
             'choices' => [
               {
@@ -32,7 +32,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::BlogPostGenerator::PromptResult.new(
+        App::PromptResult.new(
           {
             'choices' => [
               {
