@@ -5,6 +5,7 @@ require_relative '../../../lib/app/code_review_generator/code_review_prompt_resu
 require_relative '../../../lib/app/code_review_generator/code_review_writers/disk'
 
 RSpec.describe App::CodeReviewGenerator::CodeReview do
+  subject(:code_review) { described_class }
   describe '.from_code_review_prompt' do
     let(:code_review_prompt) { App::CodeReviewGenerator::CodeReviewPrompt }
 
@@ -14,7 +15,7 @@ RSpec.describe App::CodeReviewGenerator::CodeReview do
       )
 
       expect(
-        described_class.from_code_review_prompt(code_review_prompt:),
+        code_review.from_code_review_prompt(code_review_prompt:),
       ).to have_attributes({})
     end
   end
