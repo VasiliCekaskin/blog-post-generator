@@ -9,13 +9,30 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
     it 'creates a blog post' do
       expect(blog_post_prompt).to receive(:prompt!).and_return(
         App::BlogPostGenerator::BlogPostPromptResult.new(
-          { title: 'some title' }
-        )
+          { title: 'some title' },
+        ),
       )
 
       expect(
-        described_class.from_blog_post_prompt(blog_post_prompt:)
+        described_class.from_blog_post_prompt(blog_post_prompt:),
       ).to have_attributes({ title: 'some title' })
+    end
+  end
+
+  describe '#json' do
+    subject(:blog_post) { described_class.new({ title: 'some title' }) }
+
+    it 'returns json representation of the blog post' do
+      expect(Oj.load(blog_post.json, symbol_keys: true)).to eq(
+        {
+          title: 'some title',
+          author: nil,
+          date: nil,
+          tags: nil,
+          content: nil,
+          comments: nil,
+        },
+      )
     end
   end
 
@@ -25,9 +42,7 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
     let(:blog_post_writer) { App::BlogPostGenerator::BlogPostWriters::Disk }
 
     it 'writes the blog post using the given writer' do
-      expect(blog_post_writer).to receive(:write_blog_post).with(
-        blog_post:
-      )
+      expect(blog_post_writer).to receive(:write_blog_post).with(blog_post:)
 
       blog_post.save!(blog_post_writer:)
     end
