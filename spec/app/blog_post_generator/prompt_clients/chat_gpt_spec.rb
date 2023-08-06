@@ -40,8 +40,16 @@ RSpec.describe App::BlogPostGenerator::PromptClients::ChatGPT do
     end
 
     it 'returns a prompt result with data of the response' do
-      expect(chat_gpt_prompt_client.prompt!(prompt:)).to have_attributes(
-        { data: { title: 'some title' } },
+      expect(chat_gpt_prompt_client.prompt!(prompt:).data).to eq(
+        {
+          'choices' => [
+            {
+              'message' => {
+                'content' => "#{Oj.dump({ title: 'some title' })}",
+              },
+            },
+          ],
+        },
       )
     end
   end

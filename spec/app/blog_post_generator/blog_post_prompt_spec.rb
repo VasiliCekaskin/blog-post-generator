@@ -12,7 +12,17 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
+        App::BlogPostGenerator::PromptResult.new(
+          {
+            'choices' => [
+              {
+                'message' => {
+                  'content' => "#{Oj.dump({ title: 'some title' })}",
+                },
+              },
+            ],
+          },
+        ),
       )
 
       described_class.prompt!
@@ -22,7 +32,17 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::BlogPostGenerator::PromptResult.new({ title: 'some title' }),
+        App::BlogPostGenerator::PromptResult.new(
+          {
+            'choices' => [
+              {
+                'message' => {
+                  'content' => "#{Oj.dump({ title: 'some title' })}",
+                },
+              },
+            ],
+          },
+        ),
       )
 
       expect(described_class.prompt!).to have_attributes(
