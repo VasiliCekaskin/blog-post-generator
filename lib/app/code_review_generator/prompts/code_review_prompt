@@ -33,10 +33,10 @@ require_relative '../lib/app/blog_post_generator/main.rb'
 require_relative '../lib/app/logger'
 
 begin
-  App::Logger.info('Application started')
+  Logger.info('Application started')
   App::BlogPostGenerator::Main.run!
 ensure
-  App::Logger.info('Application stopped')
+  Logger.info('Application stopped')
 end
 ```
 
@@ -267,7 +267,7 @@ module App
       end
 
       def prompt!
-        App::Logger.info('Prompting for blog post')
+        Logger.info('Prompting for blog post')
 
         prompt = File.read("#{__dir__}/prompts/blog_post_prompt")
         prompt_result = prompt_client.prompt!(prompt:)
@@ -343,13 +343,13 @@ module App
         attr_reader :blog_post
 
         def write_blog_post
-          App::Logger.info('Writing new blog to disk')
+          Logger.info('Writing new blog to disk')
 
           File.open("#{__dir__}/blog_posts/#{blog_post.title}", 'w') do |file|
             blog_post.json
           end
 
-          App::Logger.info(
+          Logger.info(
             "Successfully wrote new blog to disk #{__dir__}/blog_posts/#{blog_post.title}",
           )
         end

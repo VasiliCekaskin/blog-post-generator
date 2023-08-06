@@ -2,11 +2,11 @@
 require 'dotenv/load'
 
 require_relative '../lib/app/blog_post_generator/main.rb'
-require_relative '../lib/app/logger'
+require_relative '../lib/logger'
 
 begin
-  App::Logger.info('Application started')
+  Logger.info('Application started')
   App::BlogPostGenerator::Main.run!
 ensure
-  App::Logger.info('Application stopped')
+  Logger.info('Application stopped')
 end

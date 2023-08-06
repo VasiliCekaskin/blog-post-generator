@@ -38,7 +38,7 @@ RSpec.describe App::BlogPostGenerator::Main do
           :from_blog_post_prompt,
         ).and_raise(App::PromptClients::ChatGPT::PromptError)
 
-        expect(App::Logger).to receive(:error).with(
+        expect(Logger).to receive(:error).with(
           App::PromptClients::ChatGPT::PromptError,
         )
 
@@ -52,7 +52,7 @@ RSpec.describe App::BlogPostGenerator::Main do
           :from_blog_post_prompt,
         ).and_raise(App::BlogPostGenerator::BlogPostWriters::Disk::WriteError)
 
-        expect(App::Logger).to receive(:error).with(
+        expect(Logger).to receive(:error).with(
           App::BlogPostGenerator::BlogPostWriters::Disk::WriteError,
         )
 
