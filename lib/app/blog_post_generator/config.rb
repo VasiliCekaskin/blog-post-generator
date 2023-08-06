@@ -10,7 +10,7 @@ module App
     class Config
       class << self
         def prompts_path
-          @prompts_path ||= File.join(File.dirname(__FILE__), '..', 'prompts')
+          @prompts_path ||= File.join(__dir__, 'prompts')
         end
 
         def blog_posts_path
