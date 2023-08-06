@@ -1,10 +1,10 @@
 require 'oj'
 
-require_relative '../../prompt_result'
+require_relative '../../prompt_clients/prompt_result'
 
 module App
   module BlogPostGenerator
-    class BlogPostPromptResult < PromptResult
+    class BlogPostPromptResult < PromptClients::PromptResult
       class << self
         def from_prompt_result(prompt_result)
           blog_post_prompt_result = new(prompt_result.data)

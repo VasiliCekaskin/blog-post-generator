@@ -3,7 +3,7 @@ require_relative '../../../lib/app/blog_post_generator/blog_post_prompt_result'
 RSpec.describe App::BlogPostGenerator::BlogPostPromptResult do
   describe '.from_prompt_result' do
     let(:prompt_result) do
-      App::PromptResult.new(
+      App::PromptClients::PromptResult.new(
         {
           'choices' => [
             {
