@@ -37,7 +37,19 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
             'choices' => [
               {
                 'message' => {
-                  'content' => "#{Oj.dump({ title: 'some title' })}",
+                  'content' =>
+                    "#{
+                      Oj.dump(
+                        {
+                          title: 'some title',
+                          author: 'some author',
+                          date: 'some date',
+                          tags: 'some tags',
+                          content: 'some content',
+                          comments: 'some comments',
+                        },
+                      )
+                    }",
                 },
               },
             ],
@@ -46,7 +58,16 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       )
 
       expect(described_class.prompt!).to have_attributes(
-        { data: { title: 'some title' } },
+        {
+          data: {
+            title: 'some title',
+            author: 'some author',
+            date: 'some date',
+            tags: 'some tags',
+            content: 'some content',
+            comments: 'some comments',
+          },
+        },
       )
     end
   end

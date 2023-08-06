@@ -8,7 +8,19 @@ RSpec.describe App::BlogPostGenerator::BlogPostPromptResult do
           'choices' => [
             {
               'message' => {
-                'content' => "#{Oj.dump({ title: 'some title' })}",
+                'content' =>
+                  "#{
+                    Oj.dump(
+                      {
+                        title: 'some title',
+                        author: 'some author',
+                        date: 'some date',
+                        tags: 'some tags',
+                        content: 'some content',
+                        comments: 'some comments',
+                      },
+                    )
+                  }",
               },
             },
           ],
@@ -19,7 +31,18 @@ RSpec.describe App::BlogPostGenerator::BlogPostPromptResult do
     it 'returns blog post with transformed data' do
       expect(
         described_class.from_prompt_result(prompt_result),
-      ).to have_attributes({ data: { title: 'some title' } })
+      ).to have_attributes(
+        {
+          data: {
+            title: 'some title',
+            author: 'some author',
+            date: 'some date',
+            tags: 'some tags',
+            content: 'some content',
+            comments: 'some comments',
+          },
+        },
+      )
     end
   end
 end
