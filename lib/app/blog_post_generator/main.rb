@@ -1,5 +1,5 @@
 require_relative '../blog_post_generator/config'
-require_relative '../logger'
+require_relative '../../logger'
 
 module App
   module BlogPostGenerator

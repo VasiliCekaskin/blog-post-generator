@@ -1,4 +1,4 @@
-require_relative '../../../lib/app/prompt_result'
+require_relative '../../../lib/prompt_result'
 
 RSpec.describe App::PromptResult do
   describe '#new' do

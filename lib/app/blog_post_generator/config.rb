@@ -1,4 +1,4 @@
-require_relative '../prompt_clients/chat_gpt'
+require_relative '../../prompt_clients/chat_gpt'
 require_relative 'blog_post_writers/disk'
 
 require_relative 'blog_post'

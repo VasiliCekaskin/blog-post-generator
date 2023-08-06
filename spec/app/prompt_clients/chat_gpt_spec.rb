@@ -1,4 +1,4 @@
-require_relative '../../../lib/app/prompt_clients/chat_gpt'
+require_relative '../../../lib/prompt_clients/chat_gpt'
 
 RSpec.describe App::PromptClients::ChatGPT do
   subject(:chat_gpt_prompt_client) { described_class }

@@ -1,4 +1,4 @@
-require_relative '../../logger'
+require_relative '../../../logger'
 
 module App
   module BlogPostGenerator
