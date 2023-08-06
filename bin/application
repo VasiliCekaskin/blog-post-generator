@@ -7,6 +7,8 @@ require_relative '../lib/logger'
 begin
   Logger.info('Application started')
   App::BlogPostGenerator::Main.run!
+rescue StandardError
+  raise e
 ensure
   Logger.info('Application stopped')
 end

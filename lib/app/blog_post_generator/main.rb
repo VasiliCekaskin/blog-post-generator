@@ -36,7 +36,6 @@ module App
         )
       rescue StandardError => e
         Logger.error(e)
-        raise e
       end
     end
   end
