@@ -32,9 +32,11 @@ module App
       attr_reader :code_review_prompt, :code_review_writer
 
       def generate_and_save!
-        CodeReview.from_code_review_prompt(code_review_prompt:).save!(
-          code_review_writer:
-        )
+        code_review_prompt_result = code_review_prompt.prompt!
+
+        CodeReview.from_code_review_prompt_result(
+          code_review_prompt_result:,
+        ).save!(code_review_writer:)
       rescue StandardError => e
         Logger.error(e)
       end

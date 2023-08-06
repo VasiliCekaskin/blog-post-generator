@@ -8,16 +8,21 @@ RSpec.describe App::CodeReviewGenerator::Main do
 
   describe '.run!' do
     let(:code_review) { instance_double(App::CodeReviewGenerator::CodeReview) }
+    let(:code_review_prompt_result) do
+      App::CodeReviewGenerator::CodeReviewPromptResult.new('some data')
+    end
 
     it 'Generates and writes a CodeReview' do
+      expect(App::CodeReviewGenerator::Config.code_review_prompt).to receive(
+        :prompt!,
+      ).and_return(code_review_prompt_result)
+
       expect(App::CodeReviewGenerator::CodeReview).to receive(
-        :from_code_review_prompt
-      ).with(
-        code_review_prompt: App::CodeReviewGenerator::Config.code_review_prompt
-      ).and_return(code_review)
+        :from_code_review_prompt_result,
+      ).with(code_review_prompt_result:).and_return(code_review)
 
       expect(code_review).to receive(:save!).with(
-        code_review_writer: App::CodeReviewGenerator::Config.code_review_writer
+        code_review_writer: App::CodeReviewGenerator::Config.code_review_writer,
       )
 
       main.generate_code_review!

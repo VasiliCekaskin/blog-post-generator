@@ -1,20 +1,23 @@
 # frozen_string_literal: true
 require 'securerandom'
+require 'oj'
 
 module App
   module CodeReviewGenerator
     class CodeReview
       class << self
-        def from_code_review_prompt(code_review_prompt:)
-          code_review_prompt_result = code_review_prompt.prompt!
-
+        def from_code_review_prompt_result(code_review_prompt_result:)
           new(code_review_prompt_result.data)
         end
       end
 
       def initialize(data)
-        @data = data
-        @title = SecureRandom.uuid
+        @title = data[:title]
+        @code_actions = data[:code_actions]
+      end
+
+      def json
+        Oj.dump({ title: title, code_actions: code_actions })
       end
 
       attr_reader :title

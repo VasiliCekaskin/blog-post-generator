@@ -14,10 +14,13 @@ module App
       end
 
       def transform!
-        # parsed_data =
-        #   Oj.load(@data['choices'][0]['message']['content'], symbol_keys: true)
+        parsed_data =
+          Oj.load(@data['choices'][0]['message']['content'], symbol_keys: true)
 
-        @data = {}
+        @data = {
+          title: parsed_data[:title],
+          code_actions: parsed_data[:code_actions],
+        }
       end
     end
   end
