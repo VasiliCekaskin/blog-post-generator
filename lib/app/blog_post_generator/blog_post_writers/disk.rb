@@ -23,14 +23,13 @@ module App
         def write_blog_post
           Logger.info('Writing new blog to disk')
 
-          File.open(
-            "#{Config.blog_posts_path}/#{blog_post.title}.json",
-            'w',
-          ) { |file| blog_post.json }
+          File.open(blog_post_path, 'w') { |file| blog_post.json }
 
-          Logger.info(
-            "Successfully wrote new blog to disk #{__dir__}/blog_posts/#{blog_post.title}",
-          )
+          Logger.info("Successfully wrote new blog to disk #{blog_post_path}")
+        end
+
+        def blog_post_path()
+          "#{Config.blog_posts_path}/#{blog_post.title}.json"
         end
       end
     end
