@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../blog_post_generator/config'
+require_relative './config'
 require_relative '../../logger'
 
 module App
-  module BlogPostGenerator
-    class BlogPostPrompt
+  module CodeReviewGenerator
+    class CodeReviewPrompt
       class << self
         def prompt!
           new.prompt!
@@ -19,9 +19,10 @@ module App
       def prompt!
         Logger.info('Prompting for blog post')
 
-        prompt = File.read("#{Config.prompts_path}/blog_post_prompt")
+        prompt = File.read("#{Config.prompts_path}/code_review_prompt")
+
         prompt_result = prompt_client.prompt!(prompt:)
-        BlogPostPromptResult.from_prompt_result(prompt_result)
+        CodeReviewPromptResult.from_prompt_result(prompt_result)
       end
 
       private

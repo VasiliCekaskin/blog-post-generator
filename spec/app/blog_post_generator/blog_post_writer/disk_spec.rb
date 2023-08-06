@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../../lib/app/blog_post_generator/blog_post_writers/disk'
 require_relative '../../../../lib/app/blog_post_generator/blog_post'
 
@@ -9,7 +11,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostWriters::Disk do
       instance_double(
         App::BlogPostGenerator::BlogPost,
         title: 'some_title',
-        json: 'some json',
+        json: 'some json'
       )
     end
 
@@ -18,7 +20,7 @@ RSpec.describe App::BlogPostGenerator::BlogPostWriters::Disk do
     it 'writes the blog post to disk' do
       expect(File).to receive(:open).with(
         "#{App::BlogPostGenerator::Config.blog_posts_path}/some_title.json",
-        'w',
+        'w'
       )
 
       disk.write_blog_post(blog_post:)

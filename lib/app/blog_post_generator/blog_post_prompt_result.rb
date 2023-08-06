@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'oj'
 
 require_relative '../../prompt_clients/prompt_result'
@@ -23,7 +25,7 @@ module App
           date: parsed_data[:date],
           tags: parsed_data[:tags],
           content: parsed_data[:content],
-          comments: parsed_data[:comments],
+          comments: parsed_data[:comments]
         }
       end
     end

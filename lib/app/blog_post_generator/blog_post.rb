@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './blog_post_prompt'
 
 module App

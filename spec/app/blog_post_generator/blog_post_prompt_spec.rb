@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../lib/app/blog_post_generator/blog_post_prompt'
 
 RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
@@ -18,12 +20,12 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::PromptClients::PromptResult.new(
+        PromptClients::PromptResult.new(
           {
             'choices' => [
               {
                 'message' => {
-                  'content' => "#{Oj.dump({ title: 'some title' })}",
+                  'content' => Oj.dump({ title: 'some title' }).to_s,
                 },
               },
             ],
@@ -38,24 +40,22 @@ RSpec.describe App::BlogPostGenerator::BlogPostPrompt do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
       ).and_return(
-        App::PromptClients::PromptResult.new(
+        PromptClients::PromptResult.new(
           {
             'choices' => [
               {
                 'message' => {
                   'content' =>
-                    "#{
-                      Oj.dump(
-                        {
-                          title: 'some title',
-                          author: 'some author',
-                          date: 'some date',
-                          tags: 'some tags',
-                          content: 'some content',
-                          comments: 'some comments',
-                        },
-                      )
-                    }",
+                    Oj.dump(
+                      {
+                        title: 'some title',
+                        author: 'some author',
+                        date: 'some date',
+                        tags: 'some tags',
+                        content: 'some content',
+                        comments: 'some comments',
+                      },
+                    ).to_s,
                 },
               },
             ],

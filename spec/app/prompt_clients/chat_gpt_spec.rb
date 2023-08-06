@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require_relative '../../../lib/prompt_clients/chat_gpt'
 
-RSpec.describe App::PromptClients::ChatGPT do
+RSpec.describe PromptClients::ChatGPT do
   subject(:chat_gpt_prompt_client) { described_class }
 
   describe '.prompt!' do
@@ -9,7 +11,7 @@ RSpec.describe App::PromptClients::ChatGPT do
 
     before do
       allow(OpenAI::Client).to receive(:new).with(
-        access_token: App::Config.openai_access_token,
+        access_token: Config.openai_access_token
       ).and_return(openai_client)
 
       allow(openai_client).to receive(:chat).and_return(
@@ -17,11 +19,11 @@ RSpec.describe App::PromptClients::ChatGPT do
           'choices' => [
             {
               'message' => {
-                'content' => "#{Oj.dump({ title: 'some title' })}",
-              },
-            },
-          ],
-        },
+                'content' => Oj.dump({ title: 'some title' }).to_s
+              }
+            }
+          ]
+        }
       )
     end
 
@@ -33,9 +35,9 @@ RSpec.describe App::PromptClients::ChatGPT do
           parameters: {
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: prompt }],
-            temperature: 0.7,
-          },
-        },
+            temperature: 0.7
+          }
+        }
       )
     end
 
@@ -45,11 +47,11 @@ RSpec.describe App::PromptClients::ChatGPT do
           'choices' => [
             {
               'message' => {
-                'content' => "#{Oj.dump({ title: 'some title' })}",
-              },
-            },
-          ],
-        },
+                'content' => Oj.dump({ title: 'some title' }).to_s
+              }
+            }
+          ]
+        }
       )
     end
   end

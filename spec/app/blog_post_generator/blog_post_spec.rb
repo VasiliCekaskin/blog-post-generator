@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../lib/app/blog_post_generator/blog_post'
 
 RSpec.describe App::BlogPostGenerator::BlogPost do
@@ -7,12 +9,12 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
     it 'creates a blog post' do
       expect(blog_post_prompt).to receive(:prompt!).and_return(
         App::BlogPostGenerator::BlogPostPromptResult.new(
-          { title: 'some title' },
-        ),
+          { title: 'some title' }
+        )
       )
 
       expect(
-        described_class.from_blog_post_prompt(blog_post_prompt:),
+        described_class.from_blog_post_prompt(blog_post_prompt:)
       ).to have_attributes({ title: 'some title' })
     end
   end
@@ -24,10 +26,10 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
 
     it 'writes the blog post using the given writer' do
       expect(blog_post_writer).to receive(:write_blog_post).with(
-        blog_post: blog_post,
+        blog_post:
       )
 
-      blog_post.save!(blog_post_writer: blog_post_writer)
+      blog_post.save!(blog_post_writer:)
     end
   end
 end

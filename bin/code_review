@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'dotenv/load'
+
+require_relative '../lib/app/code_review_generator/main'
+require_relative '../lib/logger'
+
+begin
+  Logger.info('Code review generator started')
+  App::CodeReviewGenerator::Main.run!
+rescue StandardError
+  raise e
+ensure
+  Logger.info('Code review generator stopped')
+end

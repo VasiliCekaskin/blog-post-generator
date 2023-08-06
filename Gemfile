@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem "ruby-openai"
 gem 'oj'
+gem 'ruby-openai'
 
 group :test do
-	gem 'rspec'
+  gem 'rspec'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :dev, :test do
-	gem 'pry'
-	gem 'dotenv'
+  gem 'dotenv'
+  gem 'pry'
 end

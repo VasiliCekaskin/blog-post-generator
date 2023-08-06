@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../prompt_clients/chat_gpt'
 require_relative 'blog_post_writers/disk'
 
@@ -18,11 +20,11 @@ module App
         end
 
         def prompt_client
-          @prompt_client ||= App::PromptClients::ChatGPT
+          @prompt_client ||= PromptClients::ChatGPT
         end
 
         def blog_post_prompt
-          @blog_post_prompt_result_prompter ||=
+          @blog_post_prompt ||=
             App::BlogPostGenerator::BlogPostPrompt
         end
 

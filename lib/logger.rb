@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Logger
   class << self
     def info(message)
