@@ -5,7 +5,9 @@ module App
     class CodeReview
       class << self
         def from_code_review_prompt(code_review_prompt:)
-          new(code_review_prompt.data)
+          code_review_prompt_result = code_review_prompt.prompt!
+
+          new(code_review_prompt_result.data)
         end
       end
 

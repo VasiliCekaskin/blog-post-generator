@@ -18,7 +18,7 @@ module App
       end
 
       def prompt!
-        Logger.info('Prompting for blog post')
+        Logger.info('Prompting for code review')
 
         prompt = File.read("#{Config.prompts_path}/code_review_prompt")
 
