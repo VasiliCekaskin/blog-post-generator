@@ -23,7 +23,7 @@ module App
         attr_reader :prompt
 
         def prompt!
-          raw_prompt_result =
+          prompt_response =
             openai_client.chat(
               parameters: {
                 model: 'gpt-3.5-turbo',
@@ -32,13 +32,7 @@ module App
               },
             )
 
-          parsed_prompt_result =
-            Oj.load(
-              raw_prompt_result['choices'][0]['message']['content'],
-              symbol_keys: true,
-            )
-
-          PromptResult.new(parsed_prompt_result)
+          PromptResult.new(prompt_response)
         end
 
         private

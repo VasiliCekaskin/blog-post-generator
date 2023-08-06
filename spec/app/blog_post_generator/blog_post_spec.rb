@@ -18,7 +18,7 @@ RSpec.describe App::BlogPostGenerator::BlogPost do
   end
 
   describe '#save!' do
-    subject(:blog_post) { described_class.new('some title') }
+    subject(:blog_post) { described_class.new({ title: 'some title' }) }
 
     let(:blog_post_writer) { App::BlogPostGenerator::BlogPostWriters::Disk }
 
