@@ -2,6 +2,7 @@
 
 require_relative './config'
 require_relative '../../logger'
+require_relative './code_review_prompt_result'
 
 module App
   module CodeReviewGenerator

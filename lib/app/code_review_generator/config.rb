@@ -17,7 +17,7 @@ module App
         end
 
         def prompt_client
-          @prompt_client ||= App::PromptClients::ChatGPT
+          @prompt_client ||= PromptClients::ChatGPT
         end
 
         def code_review_prompt
