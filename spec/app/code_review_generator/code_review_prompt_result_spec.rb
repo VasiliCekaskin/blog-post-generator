@@ -9,9 +9,39 @@ RSpec.describe App::CodeReviewGenerator::CodeReviewPromptResult do
     it 'returns a CodeReviewPromptResult from a generic prompt result' do
       expect(
         code_review_prompt.from_prompt_result(
-          PromptClients::PromptResult.new('some data')
-        )
-      ).to have_attributes({})
+          PromptClients::PromptResult.new(
+            {
+              'choices' => [
+                {
+                  'message' => {
+                    'content' =>
+                      Oj.dump(
+                        {
+                          title: 'some title',
+                          code_actions: [
+                            {
+                              file_path: 'lib/app/file.rb',
+                              new_code: 'some new file code',
+                            },
+                          ],
+                        },
+                      ),
+                  },
+                },
+              ],
+            },
+          ),
+        ),
+      ).to have_attributes(
+        {
+          data: {
+            title: 'some title',
+            code_actions: [
+              { file_path: 'lib/app/file.rb', new_code: 'some new file code' },
+            ],
+          },
+        },
+      )
     end
   end
 end

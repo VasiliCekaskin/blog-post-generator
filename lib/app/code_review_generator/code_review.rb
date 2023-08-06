@@ -20,7 +20,7 @@ module App
         Oj.dump({ title: title, code_actions: code_actions })
       end
 
-      attr_reader :title
+      attr_reader :title, :code_actions
 
       def save!(code_review_writer:)
         code_review_writer.write_code_review!(code_review: self)

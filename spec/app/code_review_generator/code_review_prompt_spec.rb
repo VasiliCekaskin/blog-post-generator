@@ -6,6 +6,30 @@ require_relative '../../../lib/prompt_clients/prompt_result'
 RSpec.describe App::CodeReviewGenerator::CodeReviewPrompt do
   describe '.prompt!' do
     let(:prompt_client) { App::CodeReviewGenerator::Config.prompt_client }
+    let(:prompt_result) do
+      PromptClients::PromptResult.new(
+        {
+          'choices' => [
+            {
+              'message' => {
+                'content' =>
+                  Oj.dump(
+                    {
+                      title: 'some title',
+                      code_actions: [
+                        {
+                          file_path: 'lib/app/file.rb',
+                          new_code: 'some new file code',
+                        },
+                      ],
+                    },
+                  ),
+              },
+            },
+          ],
+        },
+      )
+    end
 
     before do
       allow(File).to receive(:read).with(
@@ -20,13 +44,7 @@ RSpec.describe App::CodeReviewGenerator::CodeReviewPrompt do
 
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
-      ).and_return(
-        PromptClients::PromptResult.new(
-          {
-            'choices' => [{ 'message' => { 'content' => 'some code review' } }],
-          },
-        ),
-      )
+      ).and_return(prompt_result)
 
       described_class.prompt!
     end
@@ -34,15 +52,18 @@ RSpec.describe App::CodeReviewGenerator::CodeReviewPrompt do
     it 'returns a blog post prompt result' do
       expect(prompt_client).to receive(:prompt!).with(
         prompt: 'some prompt',
-      ).and_return(
-        PromptClients::PromptResult.new(
-          {
-            'choices' => [{ 'message' => { 'content' => 'some code review' } }],
-          },
-        ),
-      )
+      ).and_return(prompt_result)
 
-      expect(described_class.prompt!).to have_attributes({ data: {} })
+      expect(described_class.prompt!).to have_attributes(
+        {
+          data: {
+            title: 'some title',
+            code_actions: [
+              { file_path: 'lib/app/file.rb', new_code: 'some new file code' },
+            ],
+          },
+        },
+      )
     end
   end
 end
