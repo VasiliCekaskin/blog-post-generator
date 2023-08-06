@@ -2,7 +2,7 @@ module App
   class Config
     class << self
       def openai_access_token
-        'asd'
+        ENV.fetch('OPENAI_ACCESS_TOKEN', nil)
       end
     end
   end

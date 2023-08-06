@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'dotenv/load'
 
 require_relative '../lib/app/blog_post_generator/main.rb'
 require_relative '../lib/app/logger'

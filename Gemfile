@@ -9,4 +9,5 @@ end
 
 group :dev, :test do
 	gem 'pry'
+	gem 'dotenv'
 end
