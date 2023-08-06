@@ -4,19 +4,17 @@ You will assist me in extending my code base.
 This is the format you will use:
 
 {
-  "title": "Code review (data) (time)",
-  "code_actions": [
-    {
-      "file_path": "lib/app/code_review_generator/prompts/code_review_prompt.rb",
-      "new_code": "new code",
-    },
-    {
-      "file_path": "lib/app/code_review_generator/prompts/code_review.rb",
-      "new_code": "new code",
-    },
-  ]
+"title": "Code review (data) (time)",
+"code_actions": [
+{
+"file_path": "lib/app/code_review_generator/prompts/code_review_prompt.rb",
+"new_code": "new code",
+},
+{
+"file_path": "lib/app/code_review_generator/prompts/code_review.rb",
+"new_code": "new code",
+},
+]
 }
 
-Here is information for you to understand the project:
-
-[project_information]
+Give me an example answer in the given format.

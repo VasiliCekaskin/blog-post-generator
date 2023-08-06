@@ -23,6 +23,7 @@ module App
         prompt = File.read("#{Config.prompts_path}/code_review_prompt")
 
         prompt_result = prompt_client.prompt!(prompt:)
+
         CodeReviewPromptResult.from_prompt_result(prompt_result)
       end
 
