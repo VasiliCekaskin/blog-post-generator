@@ -16,7 +16,10 @@ RSpec.describe App::BlogPostGenerator::BlogPostWriters::Disk do
     before { allow(File).to receive(:open) }
 
     it 'writes the blog post to disk' do
-      expect(File).to receive(:open)
+      expect(File).to receive(:open).with(
+        "#{App::BlogPostGenerator::Config.blog_posts_path}/some_title.json",
+        'w',
+      )
 
       disk.write_blog_post(blog_post:)
     end

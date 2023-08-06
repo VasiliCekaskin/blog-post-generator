@@ -17,7 +17,7 @@ module App
       def prompt!
         Logger.info('Prompting for blog post')
 
-        prompt = File.read("#{__dir__}/prompts/blog_post_prompt")
+        prompt = File.read("#{Config.prompts_path}/blog_post_prompt")
         prompt_result = prompt_client.prompt!(prompt:)
         BlogPostPromptResult.from_prompt_result(prompt_result)
       end

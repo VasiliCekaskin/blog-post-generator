@@ -13,6 +13,10 @@ module App
           @prompts_path ||= File.join(File.dirname(__FILE__), '..', 'prompts')
         end
 
+        def blog_posts_path
+          @blog_posts_path ||= ENV.fetch('BLOG_POSTS_PATH', nil)
+        end
+
         def prompt_client
           @prompt_client ||= App::PromptClients::ChatGPT
         end

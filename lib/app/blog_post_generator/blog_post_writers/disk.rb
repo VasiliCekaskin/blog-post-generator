@@ -1,4 +1,5 @@
 require_relative '../../../logger'
+require_relative '../config'
 
 module App
   module BlogPostGenerator
@@ -22,9 +23,10 @@ module App
         def write_blog_post
           Logger.info('Writing new blog to disk')
 
-          File.open("#{__dir__}/blog_posts/#{blog_post.title}", 'w') do |file|
-            blog_post.json
-          end
+          File.open(
+            "#{Config.blog_posts_path}/#{blog_post.title}.json",
+            'w',
+          ) { |file| blog_post.json }
 
           Logger.info(
             "Successfully wrote new blog to disk #{__dir__}/blog_posts/#{blog_post.title}",

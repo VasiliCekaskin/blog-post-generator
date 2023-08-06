@@ -1,3 +1,4 @@
 /node_modules
 /lib/app/blog_post_generator/blog_post_writers/blog_posts/
 .env
+/output
