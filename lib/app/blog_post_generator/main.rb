@@ -34,7 +34,7 @@ module App
 
       def generate_and_save!
         BlogPost.from_blog_post_prompt(blog_post_prompt:).save!(
-          blog_post_writer:
+          blog_post_writer:,
         )
       rescue StandardError => e
         Logger.error(e)

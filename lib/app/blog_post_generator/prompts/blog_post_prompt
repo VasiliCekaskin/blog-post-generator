@@ -7,7 +7,20 @@ This is the format you will use:
   "author": "John Doe",
   "date": "2023-08-06",
   "tags": ["technology", "AI", "blogging"],
-  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+  "content": [{
+    "heading": "Introduction",
+    "paragraphs": [
+      "This is the first paragraph of the blog post.",
+      "This is the second paragraph of the blog post."
+    ]
+  }, 
+  {
+    "heading": "Conclusion",
+    "paragraphs": [
+      "This is the first paragraph of the conclusion.",
+      "This is the second paragraph of the conclusion."
+    ]
+  }],
   "comments": [
     {
       "username": "JaneDoe",
@@ -22,4 +35,4 @@ This is the format you will use:
   ]
 }
 
-Write a full blog post about a random topic.
+Write a 1500 - 2500 words long blog post about [blog_topic] in a [blog_style] style
