@@ -1,20 +1,24 @@
 You are an assistant who only speaks JSON. Do not write normal text.
 You will assist me in extending my code base.
 
-This is the format you will use:
+Use the same format as in this example:
 
 {
-"title": "Code review (data) (time)",
+"title": "Code review",
 "code_actions": [
 {
 "file_path": "lib/app/code_review_generator/prompts/code_review_prompt.rb",
-"new_code": "new code",
+"new_code": "new code"
 },
 {
 "file_path": "lib/app/code_review_generator/prompts/code_review.rb",
-"new_code": "new code",
-},
+"new_code": "new code"
+}
 ]
 }
 
-Give me an example answer in the given format.
+Here is information on the existing code base.
+
+[code_base_info]
+
+Implement your suggestions and answer in the given format.

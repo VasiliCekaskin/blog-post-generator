@@ -17,7 +17,7 @@ module App
       end
 
       def json
-        Oj.dump({ title: title, code_actions: code_actions })
+        Oj.dump({ title: title, code_actions: code_actions }, mode: :compat)
       end
 
       attr_reader :title, :code_actions

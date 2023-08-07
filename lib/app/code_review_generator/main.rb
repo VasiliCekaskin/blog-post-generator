@@ -39,6 +39,7 @@ module App
         ).save!(code_review_writer:)
       rescue StandardError => e
         Logger.error(e)
+        raise e
       end
     end
   end

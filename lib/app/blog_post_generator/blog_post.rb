@@ -29,7 +29,10 @@ module App
       attr_reader :title, :author, :date, :tags, :content, :comments
 
       def json
-        Oj.dump({ title:, author:, date:, tags:, content:, comments: })
+        Oj.dump(
+          { title:, author:, date:, tags:, content:, comments: },
+          mode: :compat,
+        )
       end
 
       def save!(blog_post_writer:)

@@ -25,7 +25,9 @@ module App
         def write_code_review
           Logger.info('Writing new code review to disk')
 
-          File.open(code_reviews_path, 'w') { |_file| code_review.json }
+          File.open(code_reviews_path, 'w') do |file|
+            file.write(code_review.json)
+          end
 
           Logger.info(
             "Successfully wrote new code review to disk #{code_reviews_path}",
@@ -33,7 +35,7 @@ module App
         end
 
         def code_reviews_path
-          "#{Config.code_reviews_path}/#{code_review.title}"
+          "#{Config.code_reviews_path}/#{code_review.title}.json"
         end
       end
     end
