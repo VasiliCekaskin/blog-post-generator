@@ -28,9 +28,7 @@ module App
 
       private
 
-      attr_reader :blog_post_prompt,
-                  :blog_post_prompt_result_parser,
-                  :blog_post_writer
+      attr_reader :blog_post_prompt, :blog_post_writer
 
       def generate_and_save!
         BlogPost.from_blog_post_prompt(blog_post_prompt:).save!(
